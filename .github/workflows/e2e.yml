@@ -1,0 +1,54 @@
+name: e2e
+
+on:
+  workflow_call:
+    inputs:
+      event_name:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: capmox-e2e
+    environment: e2e
+    concurrency:
+      group: e2e-${{ github.event.pull_request.number || github.sha }}
+      cancel-in-progress: true
+    env:
+      PROXMOX_URL: ${{ secrets.PROXMOX_URL }}
+      PROXMOX_TOKEN: ${{ secrets.PROXMOX_TOKEN }}
+      PROXMOX_SECRET: ${{ secrets.PROXMOX_SECRET }}
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+          # checkout v7 requires this for fork-PR head checkout under pull_request_target.
+          allow-unsafe-pr-checkout: true
+
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+
+      - run: make test-e2e "GINKGO_SKIP=$SKIP_E2E"
+        env:
+          # Skip Flatcar unless it's a push to main or the e2e/flatcar label is set.
+          SKIP_E2E: ${{ (inputs.event_name != 'push' && !contains(github.event.pull_request.labels.*.name, 'e2e/flatcar')) && 'Flatcar' || '' }}
+
+      - name: Upload logs
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: success() || failure()
+        with:
+          name: logs
+          path: _artifacts
+          retention-days: 7
+
+      - name: Clean up kind clusters
+        if: always() || success() || failure()
+        run: |
+          go tool kind get clusters | xargs -I% go tool kind delete cluster --name %
+          docker system prune -a -f

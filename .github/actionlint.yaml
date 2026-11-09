@@ -1,0 +1,16 @@
+---
+self-hosted-runner:
+  # Labels of self-hosted runner in array of strings.
+  labels:
+    - "self-hosted"
+    - "proxmox"
+    - "e2e"
+    - "capmox"
+    - "dcd-playground"
+    - "capmox-e2e"
+    # GitHub-hosted preview runner; not yet in actionlint's built-in label list.
+    - "ubuntu-26.04"
+# Configuration variables in array of strings defined in your repository or
+# organization. `null` means disabling configuration variables check.
+# Empty array means no configuration variable is allowed.
+config-variables: null

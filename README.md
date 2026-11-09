@@ -1,0 +1,62 @@
+# Kubernetes Cluster API Provider for Proxmox Virtual Environment - CAPMOX
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ionos-cloud_cluster-api-provider-proxmox&metric=alert_status&token=fb1b4c0a87d83a780c76c21be0f89dc13efc2ca0)](https://sonarcloud.io/summary/new_code?id=ionos-cloud_cluster-api-provider-proxmox)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ionos-cloud/cluster-api-provider-proxmox)](https://goreportcard.com/report/github.com/ionos-cloud/cluster-api-provider-proxmox)
+[![End-to-End Test Status](https://github.com/ionos-cloud/cluster-api-provider-proxmox/actions/workflows/e2e.yml/badge.svg?branch=main)](https://github.com/ionos-cloud/cluster-api-provider-proxmox/actions/workflows/e2e.yml?query=branch%3Amain)
+
+## Overview
+
+The [Cluster API](https://github.com/kubernetes-sigs/cluster-api) brings declarative, Kubernetes-style APIs to cluster creation, configuration and management.
+Cluster API Provider for Proxmox VE is a concrete implementation of Cluster API for Proxmox VE.
+
+## Launching a Kubernetes cluster on Proxmox VE
+
+Check out the [quickstart guide](./docs/Usage.md#quick-start) for launching a cluster on Proxmox VE.
+
+## Compatibility with Cluster API and Kubernetes Versions
+This provider's versions are compatible with the following versions of Cluster API:
+
+### CAPMOX v1alpha2 (current)
+
+Cluster API v1beta2
+
+|             | CAPI v1.11 | CAPI v1.12 |
+|-------------|:----------:|:----------:|
+| CAPMOX v0.8 |     ✓      |            |
+| CAPMOX v0.9 |     ✓      |     ✓      |
+
+### CAPMOX v1alpha1 (obsolete)
+<details>
+
+Cluster API v1beta1
+
+|             | CAPI v1.4 | CAPI v1.5 | CAPI v1.6 | CAPI v1.7 | CAPI v1.8 | CAPI v1.9 | CAPI v1.10 |
+|-------------|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:----------:|
+| CAPMOX v0.1 |     ✓     |     ✓     |     ☓     |     ☓     |     ☓     |     ☓     |      ☓     |
+| CAPMOX v0.2 |     ☓     |     ✓     |     ✓     |     ☓     |     ☓     |     ☓     |      ☓     |
+| CAPMOX v0.3 |     ☓     |     ✓     |     ✓     |     ✓     |     ☓     |     ☓     |      ☓     |
+| CAPMOX v0.4 |     ☓     |     ✓     |     ✓     |     ✓     |     ☓     |     ☓     |      ☓     |
+| CAPMOX v0.5 |     ☓     |     ☓     |     ✓     |     ✓     |     ☓     |     ☓     |      ☓     |
+| CAPMOX v0.6 |     ☓     |     ☓     |     ☓     |     ✓     |     ✓     |     ☓     |      ☓     |
+| CAPMOX v0.7 |     ☓     |     ☓     |     ☓     |     ☓     |     ✓     |     ✓     |      ✓     |
+
+</details>
+
+(See [Kubernetes support matrix](https://cluster-api.sigs.k8s.io/reference/versions.html) of Cluster API versions).
+
+## Documentation
+
+Further documentation is available in the `/docs` directory.
+
+## Community, discussion, contribution, and support
+
+Learn how to engage with the Kubernetes community on the [community page](http://kubernetes.io/community/).
+
+You can reach the maintainers of this project on the [Slack channel](https://kubernetes.slack.com/messages/cluster-api-proxmox).
+
+See what the community is doing with CAPMOX on the [In the media page](./docs/media.md).
+
+## Security
+
+We take security seriously.
+Please read our [security policy](SECURITY.md) for information on how to report security issues.

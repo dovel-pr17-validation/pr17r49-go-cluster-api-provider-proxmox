@@ -1,0 +1,30 @@
+---
+version: 2
+updates:
+- package-ecosystem: "gomod"
+  directory: "/"
+  schedule:
+    interval: "daily"
+  cooldown:
+    default-days: 5
+  groups:
+    kubernetes:
+      patterns:
+      - k8s.io/api
+      - k8s.io/apimachinery
+      - k8s.io/client-go
+    cluster-api:
+      patterns:
+      - sigs.k8s.io/cluster-api
+      - sigs.k8s.io/cluster-api/test
+    onsi:
+      patterns:
+      - github.com/onsi/ginkgo/v2
+      - github.com/onsi/gomega
+
+- package-ecosystem: "github-actions"
+  directory: "/"
+  schedule:
+    interval: "daily"
+  cooldown:
+    default-days: 5
